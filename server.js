@@ -24,8 +24,12 @@ if (!fs.existsSync("uploads")) {
 
 app.use(cors({
   origin: function(origin, callback) {
-   
-    if (!origin || origin.startsWith("http://localhost")) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://recipe-app-wheat-kappa.vercel.app"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
