@@ -29,7 +29,8 @@ app.use(cors({
       "http://localhost:3000",
       "https://recipe-app-wheat-kappa.vercel.app"
     ];
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Allow any vercel preview URLs too
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -37,7 +38,6 @@ app.use(cors({
   },
   credentials: true,
 }));
-
 
 
 app.use(express.json());
